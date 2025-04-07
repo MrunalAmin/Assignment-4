@@ -2,16 +2,17 @@
 {% load static %}
 
 {% block scripts %}
-  <script src="{% static 'posts/main.js' %}" defer></script>
+    <script src="{% static 'posts/main.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block title %}
-  posts
+posts
 {% endblock title %}
 
 {% block content %}
-  {% for obj in qs %}
-    {{ obj.title }} – {{ obj.body }} <br>
-  {% endfor %}
-  <div id="hello-world"></div>
+{% comment %} {% for obj in qs %}
+        {{obj.title}} - {{obj.body}} <br>
+    {% endfor %} {% endcomment %}
+    <div id="posts-box"></div>
+    <div id="hello-world"></div>
 {% endblock content %}
