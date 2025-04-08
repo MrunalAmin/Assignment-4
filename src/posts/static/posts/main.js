@@ -10,10 +10,12 @@ const title = document.getElementById('id_title')
 const body = document.getElementById('id_body')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
+const url =  window.location.href
+
 const alertBox = document.getElementById('alert-box')
 console.log('csrf', csrf[0].value)
 
-const getCookie =(name) => {
+const getCookie = (name) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
@@ -77,7 +79,7 @@ const getData = () => {
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-2">
-                                    <a href="#" class="btn btn-primary">Details</a>
+                                    <a href="${url}${el.id}" class="btn btn-primary">Details</a>
                                 </div>
                                 <div class="col-2">
                                     <form class="like-unlike-forms" data-form-id="${el.id}">
@@ -106,18 +108,18 @@ const getData = () => {
     })
 }
 
-loadBtn.addEventListener('click', ()=>{
+loadBtn.addEventListener('click', ()=> {
     spinnerBox.classList.remove('not-visible')
     visible += 3
     getData()
 })
 
-postForm.addEventListener('submit', e=>{
+postForm.addEventListener('submit', e=> {
     e.preventDefault()
 
     $.ajax({
         type: 'POST',
-        url: "",
+        url: '',
         data: {
             'csrfmiddlewaretoken': csrf[0].value,
             'title': title.value,
@@ -137,7 +139,7 @@ postForm.addEventListener('submit', e=>{
                                 <a href="#" class="btn btn-primary">Details</a>
                             </div>
                             <div class="col-2">
-                                <from class="like-unlike-forms" data-form-id="${response.id}">
+                                <form class="like-unlike-forms" data-form-id="${response.id}">
                                     <button href="#" class="btn btn-primary" id="like-unlike-${response.id}">Like</button>
                                 </form>
                             </div>
@@ -148,6 +150,7 @@ postForm.addEventListener('submit', e=>{
             likeUnlikePosts()
             $('#addPostModal').modal('hide')
             handleAlerts('success', 'New post added!')
+            postForm.reset()
         },
         error: function(error){
             console.log(error)
