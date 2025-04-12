@@ -32,6 +32,17 @@ const getCookie =(name) => {
 }
 const csrftoken = getCookie('csrftoken');
 
+function handleAlerts(type, message) {
+    alertBox.innerHTML = `
+        <div class="alert alert-${type}" role="alert">
+            ${message}
+        </div>
+    `;
+    setTimeout(() => {
+        alertBox.innerHTML = '';
+    }, 3000);
+}
+
 const deleted = localStorage.getItem('title')
 if (deleted){
     handleAlerts('danger', `deleted "${deleted}"`)
@@ -128,8 +139,8 @@ postForm.addEventListener('submit', e => {
         url: '',
         data: {
             'csrfmiddlewaretoken': csrf[0].value,
-            'title': title.querySelector('input').value,
-            'body': body.querySelector('textarea').value,
+            'title': title.value,          
+            'body': body.value, 
         },
         success: function(response) {
             console.log(response);

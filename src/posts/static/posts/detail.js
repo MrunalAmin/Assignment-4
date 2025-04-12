@@ -23,6 +23,22 @@ const bodyInput = document.getElementById('id_body')
 // });
 
 // AJAX call to fetch post detail data
+
+function handleAlerts(type, message) {
+    const alertBox = document.getElementById('alert-box');
+    if (alertBox) {
+        alertBox.innerHTML = `
+            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `;
+    } else {
+        alert(`${type.toUpperCase()}: ${message}`);
+    }
+}
+
+
 $.ajax({
     type: 'GET',
     url: url,
