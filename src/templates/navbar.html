@@ -1,0 +1,87 @@
+{% url 'posts:main-board' as path_to_home %}
+{% url 'profiles:my-profile' as path_to_my_profile %}
+
+<style>
+  .navbar-custom {
+    background-color: #1f1f1f;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .navbar-custom .brand-logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .navbar-custom .brand-logo:hover {
+    color: #d4ffcc;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-item {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: #2d2d2d;
+    border-radius: 50px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .nav-item:hover {
+    background-color: #3b6f56;
+    transform: translateY(-1px);
+  }
+
+  .nav-item.active {
+    background-color: #4caf50;
+    color: #ffffff;
+    border-color: #3f9142;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .navbar-custom {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .nav-item {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
+<nav class="navbar-custom">
+  <!-- Logo / Brand -->
+  <a class="brand-logo" href="{{ path_to_home }}">PostsProj</a>
+
+  <!-- Navigation Links -->
+  <div class="nav-links">
+    <a class="nav-item {% if request.path == path_to_home %}active{% endif %}" href="{{ path_to_home }}">Home</a>
+    <a class="nav-item {% if request.path == path_to_my_profile %}active{% endif %}" href="{{ path_to_my_profile }}">My Profile</a>
+  </div>
+</nav>
